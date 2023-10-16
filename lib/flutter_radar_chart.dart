@@ -1,6 +1,5 @@
 library flutter_radar_chart;
 
-import 'dart:ui';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -24,6 +23,7 @@ class RadarChart extends StatefulWidget {
   final Color axisColor;
   final List<Color> graphColors;
   final int sides;
+  final Duration? duration;
 
   const RadarChart({
     Key? key,
@@ -37,6 +37,7 @@ class RadarChart extends StatefulWidget {
     this.axisColor = Colors.grey,
     this.graphColors = defaultGraphColors,
     this.sides = 0,
+    this.duration,
   }) : super(key: key);
 
   factory RadarChart.light({
@@ -86,7 +87,7 @@ class _RadarChartState extends State<RadarChart>
   void initState() {
     super.initState();
     animationController = AnimationController(
-        duration: Duration(milliseconds: 1000), vsync: this);
+        duration: widget.duration ?? Duration(milliseconds: 1000), vsync: this);
 
     animation = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
       curve: Curves.fastOutSlowIn,
